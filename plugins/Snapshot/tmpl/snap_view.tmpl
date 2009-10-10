@@ -1,0 +1,74 @@
+<mt:setvarblock name="page_title">Snapshot (<mt:var name="snap_ts">) of <mt:var name="parent_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a><mt:if name="created_by"> saved by <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a></mt:if></mt:setvarblock>
+<mt:setvarblock name="html_title">
+Snapshot (<mt:var name="snap_ts">) of <mt:var name="parent_object_type"> "<mt:var name="object_title">"
+</mt:setvarblock>
+<mt:setvarblock name="html_head" append="1">
+<style type="text/css">
+ins {
+color:green;
+}
+del {
+color:red;
+}
+</style>
+</mt:setvarblock>
+
+<mt:setvarblock name="system_msg">
+	<mt:if name="saved">
+        <mtapp:statusmsg
+            id="saved"
+            class="success">
+            <__trans phrase="Your changes have been saved.">
+        </mtapp:statusmsg>
+	</mt:if>
+</mt:setvarblock>
+
+<$mt:include name="include/header.tmpl"$>
+
+<form action="<mt:var name="script_url">" method="post">
+<input type="hidden" name="__mode" value="snap_save" />
+<input type="hidden" name="id" value="<mt:var name="id">" />
+<input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+
+<mt:if name="saved_added">
+<div class="message">
+Your snapshot has been taken. You may enter an optional title and/or note below, or <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">return to the <mt:var name="lc_object_type"></a>.
+</div>
+</mt:if>
+
+<mtapp:setting
+	id="title"
+	name="title"
+	label="Snapshot Title"
+	label_class="left-label"
+>
+	<input type="text" name="title" id="title" value="<mt:var name="snap_title" escape="html">" class="half-width" />
+</mtapp:setting>
+
+<mtapp:setting
+	id="note"
+	name="note"
+	label="Note"
+	label_class="left-label"
+>
+	<textarea name="note" id="note" class="half-width"><mt:var name="snap_note" escape="html"></textarea>
+</mtapp:setting>
+
+
+<div align="center">
+<input type="submit" value="Save Changes" />
+</div>
+
+<mt:loop name="field_loop">
+	<mtapp:setting
+		id="<mt:var name="column">"
+		label="<mt:var name="label">"
+	>
+		<mt:var name="value">
+	</mtapp:setting>
+</mt:loop>
+
+</form>
+
+
+<$mt:include name="include/footer.tmpl"$>

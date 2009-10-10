@@ -1,0 +1,22 @@
+<TMPL_INCLUDE NAME="header.tmpl">
+
+<fieldset>
+
+<h3><mt:var name="headline"></h3>
+
+<div class="message">
+
+<mt:if name="action_snapped_multi">
+Your snapshots were taken at <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>.
+</mt:if>
+
+<mt:if name="action_reverted">
+Your <mt:var name="lc_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a> has been reverted
+to the snapshot from <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>.
+</mt:if>
+
+</div>
+
+</fieldset>
+
+<TMPL_INCLUDE NAME="footer.tmpl">

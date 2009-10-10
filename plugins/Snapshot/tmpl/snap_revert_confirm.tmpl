@@ -1,0 +1,18 @@
+<mt:setvarblock name="page_title">Revert <mt:var name="parent_object_type"> to Snapshot</mt:setvarblock>
+<$mt:include name="include/header.tmpl"$>
+
+<form action="<mt:var name="script_url">" method="post">
+<input type="hidden" name="__mode" value="snap_do_revert" />
+<input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+<input type="hidden" name="id" value="<mt:var name="id">" />
+<input type="hidden" name="object_id" value="<mt:var name="object_id">" />
+<input type="hidden" name="class" value="<mt:var name="class">" />
+
+
+<p>Are you sure you want to revert the <mt:var name="lc_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>
+to the snapshot from <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>? This action cannot be undone.</p>
+<input type="submit" name="confirm" value="Yes, Revert" />
+<input type="submit" name="cancel" value="No, Cancel" />
+</form>
+
+<$mt:include name="include/footer.tmpl"$>

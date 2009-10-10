@@ -1,0 +1,45 @@
+# Snapshot Plugin for Movable Type
+
+Authors: Six Apart Services, Kevin Shay
+Copyright 2009 Six Apart, Ltd.
+License: Artistic, licensed under the same terms as Perl itself
+
+## Overview
+
+The Snapshot plugin makes it easy for editors, authors, and designers to track changes to templates and entries by allowing them to save and view snapshots of the history of each of these objects.
+
+## Features
+
+* For individual template and entry/page objects:
+    * Manually take snapshots from from edit or listing screen.
+    * Auto-snapshot upon object save (optional).
+    * Max snapshots setting (optional).
+    * View list of snapshots
+    * Compare (diff) between snapshots and with the current object values.
+    * Ability to revert to a snapshot.
+* Snapshots have "Title" and "Note" fields for storing more information about the snapshot. These fields can be modified.
+* Snapshots can be:
+    * marked to keep until manually deleted
+    * manually deleted
+    * marked to expire (deleted if max snapshots total met)
+* Snapshots are retained unless a max number is defined in the plugin settings.
+
+## Desired Features
+
+* Include associated categories and tags.
+* Allow interaction with custom fields and FieldDay fields via callbacks.
+* Refine template interaction/design
+
+## Installation
+
+1. Move the Snapshot plugin directory to the MT `plugins` directory.
+2. Move the Snapshot mt-static directory to the `mt-static/plugins` directory.
+
+Should look like this when installed:
+
+    $MT_HOME/
+        plugins/
+            Snapshot/
+        mt-static/
+            Snapshot/
+

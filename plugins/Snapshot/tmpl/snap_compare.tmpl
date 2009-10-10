@@ -1,0 +1,33 @@
+<mt:setvarblock name="page_title">
+<a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>: Differences Between 
+<a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="snap_a_id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_a"> Snapshot</a>
+and 
+<mt:unless name="snap_b">Current Entry<mt:else><a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="snap_b_id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_b"> Snapshot</a></mt:unless>
+</mt:setvarblock>
+<mt:setvarblock name="html_title">
+<mt:var name="object_title">: Compare Snapshots
+</mt:setvarblock>
+<mt:setvarblock name="html_head" append="1">
+<style type="text/css">
+ins {
+color:green;
+}
+del {
+color:red;
+}
+</style>
+</mt:setvarblock>
+
+<$mt:include name="include/header.tmpl"$>
+
+<mt:loop name="field_loop">
+	<mtapp:setting
+		id="<mt:var name="column">"
+		label="<mt:var name="label">"
+	>
+		<mt:var name="value">
+	</mtapp:setting>
+</mt:loop>
+
+
+<$mt:include name="include/footer.tmpl"$>
