@@ -1,6 +1,6 @@
 # Snapshot Plugin for Movable Type
 
-Authors: Six Apart Services, Kevin Shay
+Authors: Six Apart, Kevin Shay
 Copyright 2009 Six Apart, Ltd.
 License: Artistic, licensed under the same terms as Perl itself
 
@@ -41,5 +41,6 @@ Should look like this when installed:
         plugins/
             Snapshot/
         mt-static/
-            Snapshot/
+            plugins/
+                Snapshot/
 
