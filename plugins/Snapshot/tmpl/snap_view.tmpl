@@ -1,7 +1,7 @@
-<mt:setvarblock name="page_title">Snapshot (<mt:var name="snap_ts">) of <mt:var name="parent_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a><mt:if name="created_by"> saved by <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a></mt:if></mt:setvarblock>
-<mt:setvarblock name="html_title">
-Snapshot (<mt:var name="snap_ts">) of <mt:var name="parent_object_type"> "<mt:var name="object_title">"
+<mt:setvarblock name="page_title">
+    Edit <mt:var name="parent_object_type"> Snapshot
 </mt:setvarblock>
+<$mt:setvar name="position_actions_bottom" value="1"$>
 <mt:setvarblock name="html_head" append="1">
 <style type="text/css">
 ins {
@@ -18,9 +18,18 @@ color:red;
         <mtapp:statusmsg
             id="saved"
             class="success">
-            <__trans phrase="Your changes have been saved.">
+            Snapshot details have been saved. <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Return to the Edit <mt:var name="lc_object_type"> screen</a>.
         </mtapp:statusmsg>
 	</mt:if>
+
+    <mt:if name="saved_added">
+        <mtapp:statusmsg
+            id="saved_added"
+            class="success">
+            Snapshot created. Describe add a title and/or note, or <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">return to the Edit <mt:var name="parent_object_type"> screen</a>.
+        </mtapp:statusmsg>
+    </mt:if>
+
 </mt:setvarblock>
 
 <$mt:include name="include/header.tmpl"$>
@@ -30,16 +39,36 @@ color:red;
 <input type="hidden" name="id" value="<mt:var name="id">" />
 <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
 
-<mt:if name="saved_added">
-<div class="message">
-Your snapshot has been taken. You may enter an optional title and/or note below, or <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">return to the <mt:var name="lc_object_type"></a>.
-</div>
-</mt:if>
+<fieldset>
+
+<h3>Details</h3>
+
+<$mt:Var name="object_label" value="$parent_object_type"$>
+<mtapp:setting
+	id="object"
+	name="object"
+	label="$object_label"
+	label_class="left-label"
+	content_class="field-content-text"
+>
+    <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>
+</mtapp:setting>
+
+<mtapp:setting
+	id="date"
+	name="date"
+	label="Created"
+	label_class="left-label"
+	content_class="field-content-text"
+>
+	<mt:var name="snap_ts">
+	<mt:if name="created_by"> created by <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a></mt:if>
+</mtapp:setting>
 
 <mtapp:setting
 	id="title"
 	name="title"
-	label="Snapshot Title"
+	label="Title"
 	label_class="left-label"
 >
 	<input type="text" name="title" id="title" value="<mt:var name="snap_title" escape="html">" class="half-width" />
@@ -54,19 +83,36 @@ Your snapshot has been taken. You may enter an optional title and/or note below,
 	<textarea name="note" id="note" class="half-width"><mt:var name="snap_note" escape="html"></textarea>
 </mtapp:setting>
 
+<mt:setvarblock name="action_buttons">
+    <button
+        type="submit"
+        accesskey="s"
+        title="<__trans phrase="Save changes to these settings (s)">"
+        class="primary-button"
+        ><__trans phrase="Save Changes"></button>
+</mt:setvarblock>
+<mt:include name="include/actions_bar.tmpl" bar_position="bottom" hide_pager="1" settings_bar="1">
 
-<div align="center">
-<input type="submit" value="Save Changes" />
-</div>
+</fieldset>
+
+<fieldset>
+
+<h3><mt:var name="parent_object_type"> Data</h3>
 
 <mt:loop name="field_loop">
 	<mtapp:setting
 		id="<mt:var name="column">"
 		label="<mt:var name="label">"
+    	content_class="field-content-text"
 	>
-		<mt:var name="value">
+	    <mt:If name="value">
+    		<mt:var name="value">
+    	<mt:Else>
+    	    <em>no content</em>
+        </mt:If>
 	</mtapp:setting>
 </mt:loop>
+</fieldset>
 
 </form>
 
