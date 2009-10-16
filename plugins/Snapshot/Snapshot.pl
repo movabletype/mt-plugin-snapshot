@@ -47,7 +47,7 @@ sub init_registry {
 				page_actions => {
 					entry => {
 						snap_entry => {
-							label => 'Take a Snapshot of this Entry',
+							label => 'Take a Snapshot of Entry',
 							code => sub { snap_objects('MT::Entry', @_) },
 						},
 						snap_list_entry => {
@@ -57,7 +57,7 @@ sub init_registry {
 					},
 					page => {
 						snap_page => {
-							label => 'Take a Snapshot of this Page',
+							label => 'Take a Snapshot of Page',
 							code => sub { snap_objects('MT::Page', @_) },
 						},
 						snap_list_page => {
@@ -67,7 +67,7 @@ sub init_registry {
 					},
 					template => {
 						snap_template => {
-							label => 'Take a Snapshot of this Template',
+							label => 'Take a Snapshot of Template',
 							code => sub { snap_objects('MT::Template', @_) },
 						},
 						snap_list_template => {
