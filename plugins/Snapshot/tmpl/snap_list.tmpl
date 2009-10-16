@@ -1,43 +1,51 @@
 <mt:setvarblock name="page_title">
-Snapshots of <mt:var name="parent_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=entry&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>
+    Manage <mt:var name="parent_object_type"> Snapshots
 </mt:setvarblock>
+<mt:SetVarBlock name="content_header">
+    Edit <mt:var name="lc_object_type">: <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>
+</mt:SetVarBlock>
 <mt:setvarblock name="html_title">
 Snapshots of <mt:var name="parent_object_type"> "<mt:var name="object_title">"
 </mt:setvarblock>
 <mt:setvarblock name="system_msg">
-	<mt:if name="deleted">
-		<mtapp:statusmsg
+    <mt:if name="deleted">
+        <mtapp:statusmsg
             id="deleted"
             class="success">
             <__trans phrase="You have successfully deleted the selected snapshots.">
         </mtapp:statusmsg>
-	</mt:if>
-	
-	<mt:if name="updated">
-		<mtapp:statusmsg
+    </mt:if>
+    
+    <mt:if name="updated">
+        <mtapp:statusmsg
             id="updated"
             class="success">
             <__trans phrase="You have successfully updated the selected snapshots.">
         </mtapp:statusmsg>
-	</mt:if>
+    </mt:if>
+
 </mt:setvarblock>
 
 <mt:setvarblock name="html_head" append="1">
+<style type="text/css">
+    #main-content { padding-top: 5px; }
+    #snapshot-listing-table td {vertical-align: middle;}
+</style>
 
 <script type="text/javascript">
 <!--
 var tableSelect;
 function init()
 {
-	// setup
-	tableSelect = new TC.TableSelect( "snapshot-listing-table" );
-	tableSelect.rowSelect = false;
+    // setup
+    tableSelect = new TC.TableSelect( "snapshot-listing-table" );
+    tableSelect.rowSelect = false;
 }
 
 TC.attachLoadEvent( init );
 
 function doRemoveSnaps () {
-	var f = getByID('snapshot-listing-form');
+    var f = getByID('snapshot-listing-form');
     var count = countMarked(f);
     if (!count) {
         alert('You did not select any snapshots to delete.');
@@ -47,30 +55,30 @@ function doRemoveSnaps () {
     pluralMessage = trans('Are you sure you want to delete the selected snapshots?');
 
     if (confirm(count == 1 ? singularMessage : pluralMessage)) {
-    	f['__mode'].value = 'snap_delete';
-		f.action_name.value = 'delete';
-		f.submit();
+        f['__mode'].value = 'snap_delete';
+        f.action_name.value = 'delete';
+        f.submit();
     }
 }
 
 function doKeepSnaps (keep) {
-	var f = getByID('snapshot-listing-form');
+    var f = getByID('snapshot-listing-form');
     var count = countMarked(f);
     if (!count) {
         alert('You did not select any snapshots.');
         return false;
     }
-	f['__mode'].value = 'snap_keep';
-	f.keep.value = keep ? '1' : '0';
-	f.submit();
+    f['__mode'].value = 'snap_keep';
+    f.keep.value = keep ? '1' : '0';
+    f.submit();
 }
 
 function snap_select (sel, id) {
-	if (id == sel.options[sel.selectedIndex].value) {
-		alert('The selected snapshot is the same one being compared.');
-		return false;
-	}
-	window.location = '<mt:var name="script_url">?__mode=snap_compare&id=' + id + '&compare_id=' + sel.options[sel.selectedIndex].value + '&object_id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">';
+    if (id == sel.options[sel.selectedIndex].value) {
+        alert('The selected snapshot is the same one being compared.');
+        return false;
+    }
+    window.location = '<mt:var name="script_url">?__mode=snap_compare&id=' + id + '&compare_id=' + sel.options[sel.selectedIndex].value + '&object_id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">';
 }
 //-->
 </script>
@@ -80,71 +88,79 @@ function snap_select (sel, id) {
 <$mt:include name="include/header.tmpl"$>
 
 <mt:setvarblock name="action_buttons">
-	<a href="javascript:void(0)"
-	onclick="doRemoveSnaps();"
-	>Delete</a>
-	<a href="javascript:void(0)"
-	onclick="doKeepSnaps(1);"
-	>Keep until Manually Deleted</a>
-	<a href="javascript:void(0)"
-	onclick="doKeepSnaps(0);"
-	>Allow to Expire</a>
+    <a href="javascript:void(0)"
+    onclick="doKeepSnaps(1);"
+    >Keep until Manually Deleted</a>
+    <a href="javascript:void(0)"
+    onclick="doKeepSnaps(0);"
+    >Allow to Expire</a>
+    <a href="javascript:void(0)"
+    onclick="doRemoveSnaps();"
+    style="margin-left: 20px;"
+    >Delete</a>
 </mt:setvarblock>
 
 <mtapp:listing>
     <mt:if name="__first__">
-	<input type="hidden" name="parent_object_type" value="<mt:var name="parent_object_type">" />
-	<input type="hidden" name="object_id" value="<mt:var name="object_id">" />
-	<input type="hidden" name="action_name" value="" />
-	<input type="hidden" name="keep" value="" />
-	<mt:if name="blog_id">
-	<input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
-	</mt:if>
+    <input type="hidden" name="parent_object_type" value="<mt:var name="parent_object_type">" />
+    <input type="hidden" name="object_id" value="<mt:var name="object_id">" />
+    <input type="hidden" name="action_name" value="" />
+    <input type="hidden" name="keep" value="" />
+    <mt:if name="blog_id">
+    <input type="hidden" name="blog_id" value="<mt:var name="blog_id">" />
+    </mt:if>
     <thead>
         <tr>
-			<th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
-			<th id="snap-ts"><__trans phrase="Title/Taken On"></th>
-			<th id="snap-created"><__trans phrase="Saved By"></th>
-			<th id="snap-keep"><__trans phrase="Keep"></th>
-			<th id="snap-actions"><__trans phrase="Actions"></th>
+            <th class="cb"><input type="checkbox" name="id-head" value="all" class="select" /></th>
+            <th id="snap-ts"><__trans phrase="Date"></th>
+            <th id="snap-title"><__trans phrase="Title"></th>
+            <th id="snap-created"><__trans phrase="Saved By"></th>
+            <th id="snap-keep"><__trans phrase="Keep"></th>
+            <th id="snap-actions"><__trans phrase="Compare to..."></th>
+            <th id="snap-actions"><__trans phrase="Revert"></th>
         </tr>
     </thead>
     <tbody>
     </mt:if>
         <tr class="<mt:if name="__odd__">odd<mt:else>even</mt:if>">
-			<td class="cb" id="delete-<mt:var name="id">"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></td>
-			<td class="edit-col" id="snap-cell-<mt:var name="id">">
-			<mt:if name="title">
-			<a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="title"></a> (<mt:var name="created_on">)
-			<mt:else>
-			<a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="created_on"></a>
-			</mt:if>
-			</td>
-			<td class="edit-col">
-			<mt:var name="foo">
-			<mt:if name="created_by">
-			<a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a>
-			<mt:else>
-			&nbsp;
-			</mt:if>
-			</td>
-			<td class="edit-col">
-			<mt:if name="keep">
-			Yes
-			<mt:else>
-			No
-			</mt:if>
-			</td>
-			<td class="edit-col">
-			<a href="<mt:var name="script_url">?__mode=snap_revert&id=<mt:var name="id">&object_id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Revert <mt:var name="parent_object_type"></a>&nbsp;&nbsp;&nbsp;Compare to: 
-			<select name="snap_compare_id" id="snap_compare_id" onchange="snap_select(this, <mt:var name="id">);">
-			<option value="" selected="selected">Select Version</option>
-			<option value="current">Current <mt:var name="parent_object_type"></option>
-			<TMPL_LOOP NAME=SNAP_LOOP>
-			<option value="<mt:var name="id">">Snapshot: <mt:var name="created_on"></option>
-			</TMPL_LOOP>
-			</select>
-			</td>
+            <td class="cb" id="delete-<mt:var name="id">"><input type="checkbox" name="id" value="<mt:var name="id">" class="select" /></td>
+            <td class="edit-col" id="snap-cell-<mt:var name="id">">
+                <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="created_on"></a>
+            </td>
+            <td class="edit-col">
+            <mt:if name="title">
+                <mt:var name="title">
+            <mt:else>
+                <em>none</em>
+            </mt:if>
+            </td>
+            <td class="edit-col">
+            <mt:var name="foo">
+            <mt:if name="created_by">
+            <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a>
+            <mt:else>
+            &nbsp;
+            </mt:if>
+            </td>
+            <td class="edit-col">
+            <mt:if name="keep">
+            Yes
+            <mt:else>
+            No
+            </mt:if>
+            </td>
+            <td class="edit-col">
+            <select name="snap_compare_id" id="snap_compare_id" onchange="snap_select(this, <mt:var name="id">);">
+            <option value="" selected="selected">select snapshot...</option>
+            <option value="current">Current Version</option>
+            <mt:Loop var="snap_loop">
+                <option value="<mt:var name="id">"><mt:var name="created_on"></option>
+            </mt:Loop>
+            </select>
+            </td>
+            <td class="edit-col">
+            <a href="<mt:var name="script_url">?__mode=snap_revert&id=<mt:var name="id">&object_id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Revert</a>
+            </td>
         </tr>
     <mt:if name="__last__">
     </tbody>

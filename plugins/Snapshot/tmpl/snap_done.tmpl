@@ -1,22 +1,51 @@
-<TMPL_INCLUDE NAME="header.tmpl">
+<mt:setvarblock name="page_title">
+    <$mt:var name="headline"$>
+</mt:setvarblock>
 
-<fieldset>
+<mt:setvarblock name="system_msg">
+    <mt:if name="action_snapped_multi">
+        <mtapp:statusmsg
+            id="action_snapped_multi"
+            class="success">
+            Snapshot(s) successfully created.
+        </mtapp:statusmsg>
+    </mt:if>
+    <mt:if name="action_reverted">
+        <mtapp:statusmsg
+            id="action_reverted"
+            class="success">
+            <$mt:Var name="parent_object_type"$> has been successfully reverted. <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"> Edit <mt:var name="lc_object_type"></a>.
+        </mtapp:statusmsg>
+    </mt:if>
+</mt:setvarblock>
 
-<h3><mt:var name="headline"></h3>
-
-<div class="message">
+<$mt:include name="include/header.tmpl"$>
 
 <mt:if name="action_snapped_multi">
-Your snapshots were taken at <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>.
+    <p>Snapshots created at <mt:var name="snap_ts">:</p>
+    <mt:Ignore>
+    <ul>
+    <mt:Loop var="snap_ids">
+        <li>
+            <strong><a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a></strong>
+            -
+            <a href="<mt:var name="script_url">?__mode=snap_view&blog_id=<mt:var name="blog_id">&id=<mt:var name="id">">edit snapshot</a>
+            or
+            <a href="<mt:var name="script_url">?__mode=page_action&_type=<mt:var name="lc_object_type">&action_name=snap_list_<mt:var name="lc_object_type">&from=edit_page&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">view snapshots</a>
+        </li>
+    </mt:Loop>
+    </ul>
+    </mt:Ignore>
 </mt:if>
 
 <mt:if name="action_reverted">
-Your <mt:var name="lc_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a> has been reverted
-to the snapshot from <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>.
+    <p>The <mt:var name="lc_object_type"> <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a> has been reverted
+to the snapshot from <a href="<mt:var name="script_url">?__mode=snap_view&id=<mt:var name="id">&blog_id=<mt:var name="blog_id">"><mt:var name="snap_ts"></a>.</p>
+    <p>
+        <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Edit <mt:var name="lc_object_type"></a>
+        or
+        <a href="<mt:var name="script_url">?__mode=page_action&_type=<mt:var name="lc_object_type">&action_name=snap_list_<mt:var name="lc_object_type">&from=edit_page&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">view snapshots</a>.
+    </p>
 </mt:if>
 
-</div>
-
-</fieldset>
-
-<TMPL_INCLUDE NAME="footer.tmpl">
+<$mt:include name="include/footer.tmpl"$>

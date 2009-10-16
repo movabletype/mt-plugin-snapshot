@@ -1,27 +1,27 @@
 <mtapp:setting
-	id="auto_snap"
-	label="Automatic snapshot on save:"
+    id="auto_snap"
+    label="Automatic snapshot on save:"
 >
-	<ul>
-	<li><input type="checkbox" name="auto_snap_entry" id="auto_snap_entry" value="1"<mt:if name="auto_snap_entry"> checked="checked"</mt:if> class="cb" /> <__trans phrase="Entries"></li>
-	</ul>
-	<ul>
-	<li><input type="checkbox" name="auto_snap_template" id="auto_snap_template" value="1"<mt:if name="auto_snap_template"> checked="checked"</mt:if> class="cb" /> <__trans phrase="Templates"></li>
-	</ul>
+    <ul>
+    <li><input type="checkbox" name="auto_snap_entry" id="auto_snap_entry" value="1"<mt:if name="auto_snap_entry"> checked="checked"</mt:if> class="cb" /> <__trans phrase="Entries"></li>
+    </ul>
+    <ul>
+    <li><input type="checkbox" name="auto_snap_template" id="auto_snap_template" value="1"<mt:if name="auto_snap_template"> checked="checked"</mt:if> class="cb" /> <__trans phrase="Templates"></li>
+    </ul>
 </mtapp:setting>
 
 <mtapp:setting
-	id="keep_n_entry"
-	label="Keep"
+    id="keep_n_entry"
+    label="Keep"
 >
-	<input type="text" name="keep_n_entry" id="keep_n_entry" value="<mt:var name="keep_n_entry" escape="html">" style="width:20px;" /> <label style="color:#333;font-size: 11px;">snapshots for each entry</label>
+    <input type="text" name="keep_n_entry" id="keep_n_entry" value="<mt:var name="keep_n_entry" escape="html">" style="width:20px;" /> <label style="color:#333;font-size: 11px;">snapshots for each entry</label>
 </mtapp:setting>
 
 <mtapp:setting
-	id="keep_n_template"
-	label="Keep"
-	hint="If these fields are filled in, older snapshots will expire and be deleted as new snapshots of an object are taken. (Snapshots marked as 'Keep' are not included in the count.)"
-	show_hint="1"
+    id="keep_n_template"
+    label="Keep"
+    hint="If these fields are filled in, older snapshots will expire and be deleted as new snapshots of an object are taken. (Snapshots marked as 'Keep' are not included in the count.)"
+    show_hint="1"
 >
-	<input type="text" name="keep_n_template" id="keep_n_template" value="<mt:var name="keep_n_template" escape="html">" style="width:20px;" /> <label style="color:#333;font-size: 11px;">snapshots for each template</label>
+    <input type="text" name="keep_n_template" id="keep_n_template" value="<mt:var name="keep_n_template" escape="html">" style="width:20px;" /> <label style="color:#333;font-size: 11px;">snapshots for each template</label>
 </mtapp:setting>

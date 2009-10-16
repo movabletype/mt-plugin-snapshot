@@ -14,13 +14,13 @@ color:red;
 </mt:setvarblock>
 
 <mt:setvarblock name="system_msg">
-	<mt:if name="saved">
+    <mt:if name="saved">
         <mtapp:statusmsg
             id="saved"
             class="success">
-            Snapshot details have been saved. <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Return to the Edit <mt:var name="lc_object_type"> screen</a>.
+            Snapshot details have been saved.
         </mtapp:statusmsg>
-	</mt:if>
+    </mt:if>
 
     <mt:if name="saved_added">
         <mtapp:statusmsg
@@ -31,6 +31,12 @@ color:red;
     </mt:if>
 
 </mt:setvarblock>
+
+<mt:SetVarBlock name="content_header">
+    <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">Edit <mt:var name="lc_object_type"></a>
+    or
+    <a href="<mt:var name="script_url">?__mode=page_action&_type=<mt:var name="lc_object_type">&action_name=snap_list_<mt:var name="lc_object_type">&from=edit_page&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">">view snapshots</a>.
+</mt:SetVarBlock>
 
 <$mt:include name="include/header.tmpl"$>
 
@@ -45,42 +51,42 @@ color:red;
 
 <$mt:Var name="object_label" value="$parent_object_type"$>
 <mtapp:setting
-	id="object"
-	name="object"
-	label="$object_label"
-	label_class="left-label"
-	content_class="field-content-text"
+    id="object"
+    name="object"
+    label="$object_label"
+    label_class="left-label"
+    content_class="field-content-text"
 >
     <a href="<mt:var name="script_url">?__mode=view&_type=<mt:var name="lc_object_type">&id=<mt:var name="object_id">&blog_id=<mt:var name="blog_id">"><mt:var name="object_title"></a>
 </mtapp:setting>
 
 <mtapp:setting
-	id="date"
-	name="date"
-	label="Created"
-	label_class="left-label"
-	content_class="field-content-text"
+    id="date"
+    name="date"
+    label="Created"
+    label_class="left-label"
+    content_class="field-content-text"
 >
-	<mt:var name="snap_ts">
-	<mt:if name="created_by"> created by <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a></mt:if>
+    <mt:var name="snap_ts">
+    <mt:if name="created_by"> created by <a href="<mt:var name="script_url">?__mode=view&_type=author&id=<mt:var name="created_by">"><mt:var name="created_by_name"></a></mt:if>
 </mtapp:setting>
 
 <mtapp:setting
-	id="title"
-	name="title"
-	label="Title"
-	label_class="left-label"
+    id="title"
+    name="title"
+    label="Title"
+    label_class="left-label"
 >
-	<input type="text" name="title" id="title" value="<mt:var name="snap_title" escape="html">" class="half-width" />
+    <input type="text" name="title" id="title" value="<mt:var name="snap_title" escape="html">" class="half-width" />
 </mtapp:setting>
 
 <mtapp:setting
-	id="note"
-	name="note"
-	label="Note"
-	label_class="left-label"
+    id="note"
+    name="note"
+    label="Note"
+    label_class="left-label"
 >
-	<textarea name="note" id="note" class="half-width"><mt:var name="snap_note" escape="html"></textarea>
+    <textarea name="note" id="note" class="full-width"><mt:var name="snap_note" escape="html"></textarea>
 </mtapp:setting>
 
 <mt:setvarblock name="action_buttons">
@@ -100,17 +106,17 @@ color:red;
 <h3><mt:var name="parent_object_type"> Data</h3>
 
 <mt:loop name="field_loop">
-	<mtapp:setting
-		id="<mt:var name="column">"
-		label="<mt:var name="label">"
-    	content_class="field-content-text"
-	>
-	    <mt:If name="value">
-    		<mt:var name="value">
-    	<mt:Else>
-    	    <em>no content</em>
+    <mtapp:setting
+        id="<mt:var name="column">"
+        label="<mt:var name="label">"
+        content_class="field-content-text"
+    >
+        <mt:If name="value">
+            <mt:var name="value">
+        <mt:Else>
+            <em>no content</em>
         </mt:If>
-	</mtapp:setting>
+    </mtapp:setting>
 </mt:loop>
 </fieldset>
 
