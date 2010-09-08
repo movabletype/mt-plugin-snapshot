@@ -3,7 +3,7 @@ use strict;
 use Data::Dumper;
 
 use vars qw( $VERSION );
-$VERSION = '1.4';
+$VERSION = '1.5';
 
 use base qw( MT::Plugin );
 
@@ -294,7 +294,7 @@ sub snap_view {
         my ($col, $label, $type) = @$field;
         $label ||= $col;
         $type ||= '';
-        my $value = $obj->$col;
+        my $value = $obj->column($col);
         if ($type eq 'boolean') {
             $value = $value ? 'On' : 'Off'
         } elsif ($type eq 'date') {
@@ -375,8 +375,13 @@ sub snap_compare {
         my ($col, $label, $type) = @$field;
         $label ||= $col;
         $type ||= '';
-        my $val_a = $orig_obj->$col;
-        my $val_b = $new_obj->$col;
+        my ($val_a, $val_b);
+        $val_a = $orig_obj->column($col);
+        if ($comp_id eq 'current') {
+            $val_b = $new_obj->$col;
+        } else {
+            $val_b = $new_obj->column($col);
+        }
         if ($type eq 'boolean') {
             $val_a = $val_a ? 'On' : 'Off';
             $val_b = $val_b ? 'On' : 'Off';
