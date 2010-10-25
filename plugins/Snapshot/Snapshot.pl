@@ -26,7 +26,7 @@ my $plugin;
 $plugin = MT::Plugin::Snapshot->new({
     'name' => 'Snapshot',
     'id' => 'Snapshot',
-    'author_name' => 'Six Apart, Kevin Shay, Beau Smith',
+    'author_name' => 'Six Apart',
     'description' => 'Save and revert to snapshots of entry, page, and template objects.',
     'version' => $VERSION,
     'schema_version' => '0.411',

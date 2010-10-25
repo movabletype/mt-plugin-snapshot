@@ -1,7 +1,7 @@
 # Snapshot Plugin for Movable Type
 
-* Authors: Six Apart, Kevin Shay
-* Copyright 2009 Six Apart, Ltd.
+* Authors: Six Apart
+* Copyright (C) 2009 Six Apart Ltd.
 * License: GPL
 
 
