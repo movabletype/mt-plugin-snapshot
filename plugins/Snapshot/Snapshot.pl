@@ -15,7 +15,7 @@ use strict;
 use Data::Dumper;
 
 use vars qw( $VERSION );
-$VERSION = '1.5';
+$VERSION = '1.6';
 
 use base qw( MT::Plugin );
 
