@@ -1,4 +1,3 @@
-
 package MT::Snapshot;
 
 use strict;

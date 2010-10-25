@@ -243,7 +243,7 @@ sub snap_list {
         $param->{$key} = $app->param($key);
     }
     init_app_vars($app, "$param->{'parent_object_type'} Snapshots");
-    
+
     my $terms = {
         'object_id' => $obj->id,
         'object_ds' => $obj->datasource
@@ -272,11 +272,11 @@ sub snap_list {
                     $row->{'created_by'} = $snap->created_by;
                     $row->{'created_by_name'} = $users->{$snap->created_by}->name;
                 }
-            }            
+            }
         },
         params => $param,
     });
-    
+
 }
 
 sub snap_view {
@@ -325,7 +325,7 @@ sub convert_breaks {
     eval { $obj->convert_breaks }; return $value if ($@);
     require MT::Blog;
     my $blog = MT::Blog->load($obj->blog_id);
-    my $convert_breaks = defined $obj->convert_breaks 
+    my $convert_breaks = defined $obj->convert_breaks
         ? $obj->convert_breaks : $blog->convert_paras;
     if ($convert_breaks) {
         my $filters = $obj->text_filters;
